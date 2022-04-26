@@ -21,15 +21,21 @@ class SMS:
 
     def __init__(self, api_key, device=None, sim=None, priority=None, response_format="json"):
         self.api_key = api_key
-        self.params = dict(key=self.api_key)
         self.response_format = response_format
+        self.params = dict(key=self.api_key)
         self.request = requests.Session()
+
         if device:
             self.device = device
+            self.params['device'] = device
+
         if sim:
             self.sim = sim
+            self.params['sim'] = sim
+
         if priority:
             self.priority = priority
+            self.params['priority'] = priority
 
     def send_request(self, url, method, params=None, data=None):
         """Send request to the API
