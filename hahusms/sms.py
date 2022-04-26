@@ -142,3 +142,12 @@ class SMS:
         """Send an sms to defined phone recipient"""
         url = f"{self.api_url}/{endpoint}"
         return self._construct_request(url, method, params=params, data=data)
+
+    def send_message(self, to, message, data=None, params=None, endpoint="api/send", method="get"):
+        """Send an sms to defined phone recipient"""
+        url = f"{self.api_url}/{endpoint}"
+        if params:
+            params.update({"phone": to, "message": message})
+        else:
+            params = {"phone": to, "message": message}
+        return self._construct_request(url, method, params=params, data=data)
